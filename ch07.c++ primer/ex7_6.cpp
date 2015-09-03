@@ -42,8 +42,6 @@ ostream &print(ostream &os, Sales_data &item)
 }
 
 
-
-
 int main()
 {
 	double price = 0;
