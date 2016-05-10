@@ -99,11 +99,29 @@ void StrVec::push_back(const std::string& s)
 	alloc.construct(first_free++, s);
 }
 
+/*
 std::pair<std::string *, std::string*> StrVec::alloc_n_copy(const string*b, const string *e)
 {
 	auto data = alloc.allocate(e - b);
 	return{ data,uninitialized_copy(b, e, data) };
+}*/
+
+std::pair<std::string *, std::string*> StrVec::alloc_n_copy( string* b, string* e)
+{
+	std::string* const data = alloc.allocate(e - b);
+	std::string* p = data;
+	std::string* i;
+	for (i=b;i != e; i++)
+	{
+		alloc.construct(p++, *i);
+	}
+	return { data, p };
+	//return{ data, uninitialized_copy(b, e, data) };
 }
+
+
+
+
 
 void StrVec::free()
 {
